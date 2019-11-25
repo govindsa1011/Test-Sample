@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import com.sdk.vocalize.Vocalize
 import com.sdk.vocalize.VocalizeInitializeListener
 import com.sdk.vocalize.VocalizeListener
+import com.sdk.vocalize.models.StateModel
 
 class MainActivity : AppCompatActivity(), VocalizeInitializeListener {
 
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity(), VocalizeInitializeListener {
 
     }
 
-    override fun onInit() {
+    override fun onInit(stateModels: ArrayList<StateModel>) {
         // Get the action and data from the intent to handle it.
         val action: String? = intent?.action
         when (action) {
