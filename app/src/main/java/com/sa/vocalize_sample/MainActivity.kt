@@ -13,7 +13,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.sdk.vocalize.Vocalize
 import com.sdk.vocalize.VocalizeInitializeListener
-import com.sdk.vocalize.VocalizeListener
 import com.sdk.vocalize.models.StateModel
 
 class MainActivity : AppCompatActivity(), VocalizeInitializeListener {
@@ -88,16 +87,16 @@ class MainActivity : AppCompatActivity(), VocalizeInitializeListener {
     }
 
     private fun callMethod(intent: Intent?) {
-        Vocalize.searchKeyword(intent?.data, object : VocalizeListener {
-
-            override fun onSuccess() {
-
-            }
-
-            override fun onError(error: String) {
-
-            }
-        })
+//        Vocalize.searchKeyword(intent?.data, object : VocalizeListener {
+//
+//            override fun onSuccess() {
+//
+//            }
+//
+//            override fun onError(error: String) {
+//
+//            }
+//        })
     }
 
     override fun onDestroy() {
