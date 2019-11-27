@@ -1,16 +1,10 @@
 package com.sa.vocalize_sample
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.sdk.vocalize.Vocalize
 import com.sdk.vocalize.VocalizeInitializeListener
 import com.sdk.vocalize.models.StateModel
@@ -21,49 +15,8 @@ class MainActivity : AppCompatActivity(), VocalizeInitializeListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getPhonePermission()
-        }
-    }
 
-    private fun getPhonePermission() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_PHONE_STATE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(
-                    this,
-                    Manifest.permission.READ_PHONE_STATE
-                )
-            ) {
-
-            }
-
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.READ_PHONE_STATE),
-                101
-            )
-        } else {
-            Vocalize.initialize(this@MainActivity, this)
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if (requestCode == 101) {
-            if (grantResults.size > 0 && grantResults.get(0) == PackageManager.PERMISSION_GRANTED) {
-                Vocalize.initialize(this@MainActivity, this)
-            } else {
-                getPhonePermission()
-            }
-
-            return
-        }
+        Vocalize.initialize(this@MainActivity, this)
 
     }
 
@@ -82,21 +35,11 @@ class MainActivity : AppCompatActivity(), VocalizeInitializeListener {
     }
 
     override fun onError(error: String) {
-        Log.e("Error=====>> ", error)
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
     }
 
     private fun callMethod(intent: Intent?) {
-//        Vocalize.searchKeyword(intent?.data, object : VocalizeListener {
-//
-//            override fun onSuccess() {
-//
-//            }
-//
-//            override fun onError(error: String) {
-//
-//            }
-//        })
+
     }
 
     override fun onDestroy() {
