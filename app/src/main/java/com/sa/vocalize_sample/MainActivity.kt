@@ -2,19 +2,15 @@ package com.sa.vocalize_sample
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.sdk.vocalize.Vocalize
-import com.sdk.vocalize.VocalizeInitializeListener
-import com.sdk.vocalize.models.StateModel
 
-class MainActivity : AppCompatActivity(), VocalizeInitializeListener {
+class MainActivity : AppCompatActivity() {
 
     @SuppressLint("ObsoleteSdkInt")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +41,7 @@ class MainActivity : AppCompatActivity(), VocalizeInitializeListener {
                 101
             )
         } else {
-            Vocalize.initialize(this@MainActivity, this)
+//            Vocalize.initialize(this@MainActivity, this)
         }
     }
 
@@ -56,7 +52,7 @@ class MainActivity : AppCompatActivity(), VocalizeInitializeListener {
     ) {
         if (requestCode == 101) {
             if (grantResults.size > 0 && grantResults.get(0) == PackageManager.PERMISSION_GRANTED) {
-                Vocalize.initialize(this@MainActivity, this)
+//                Vocalize.initialize(this@MainActivity, this)
             } else {
                 getPhonePermission()
             }
@@ -64,37 +60,6 @@ class MainActivity : AppCompatActivity(), VocalizeInitializeListener {
             return
         }
 
-    }
-
-    override fun onInit(stateModels: ArrayList<StateModel>) {
-        // Get the action and data from the intent to handle it.
-        val action: String? = intent?.action
-        when (action) {
-            // When the action is triggered by a deep-link, Intent.Action_VIEW will be used
-            Intent.ACTION_VIEW -> callMethod(intent)
-
-            // Otherwise start the app as you would normally do.
-            else -> {
-
-            }
-        }
-    }
-
-    override fun onError(error: String) {
-        Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun callMethod(intent: Intent?) {
-//        Vocalize.searchKeyword(intent?.data, object : VocalizeListener {
-//
-//            override fun onSuccess() {
-//
-//            }
-//
-//            override fun onError(error: String) {
-//
-//            }
-//        })
     }
 
     override fun onDestroy() {
